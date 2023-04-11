@@ -15,6 +15,7 @@ class Ip_table extends Model  {
     /* - */
     protected function getCountryCode($ip) {
         return $this->select('code')
+            ->orderByDesc('last_date')
             ->whereRaw('INET_ATON(`to_ip`) <= INET_ATON(?) AND INET_ATON(`end_ip`) >= INET_ATON(?)', [$ip, $ip])
             ->first();
     }
